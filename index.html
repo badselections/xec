@@ -318,13 +318,14 @@
 
   /* ===== stats section: Capsules ===== */
   .fields[data-f="12"]{gap:10px}
-  .fields[data-f="12"] .field{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;align-items:center;column-gap:12px;row-gap:0;border-radius:40px;padding:10px 20px 10px 10px;background:#07060c;border-color:rgba(255,255,255,.1)}
+  .fields[data-f="12"] .field{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto auto;align-items:center;column-gap:12px;row-gap:0;border-radius:40px;padding:10px 22px 10px 10px;background:#07060c;border-color:rgba(255,255,255,.1)}
   .fields[data-f="12"] .field .top{display:contents}
-  .fields[data-f="12"] .ic{grid-row:1/3;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#ff2bb3,#6a3cff,#1fd2ff,#ffe94a,#ff2bb3);background-size:300% 300%;animation:auroraSlide 7s linear infinite;box-shadow:0 0 18px rgba(106,60,255,.4)}
+  .fields[data-f="12"] .ic{grid-row:1/4;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#ff2bb3,#6a3cff,#1fd2ff,#ffe94a,#ff2bb3);background-size:300% 300%;animation:auroraSlide 7s linear infinite;box-shadow:0 0 18px rgba(106,60,255,.4)}
   .fields[data-f="12"] .ic svg{stroke:#fff;width:19px;height:19px}
   .fields[data-f="12"] .t{grid-column:2;grid-row:1;font-size:12px;line-height:1.2}
   .fields[data-f="12"] .field input{grid-column:2;grid-row:2;font-size:21px}
-  .fields[data-f="12"] .field .hint{display:none}
+  .fields[data-f="12"] .field .hint{grid-column:2;grid-row:3;margin:0;min-height:0;font-size:11.5px;line-height:1.2;color:#9a9aa3;max-height:0;opacity:0;overflow:hidden;transition:max-height .25s ease,opacity .25s ease,margin .25s ease}
+  .fields[data-f="12"] .field .hint.has{max-height:18px;opacity:1;margin-top:1px}
   .fields[data-f="12"] .field:focus-within{border-color:rgba(255,255,255,.4);box-shadow:0 0 0 4px rgba(106,60,255,.18)}
   @keyframes auroraSlide{to{background-position:300% 0}}
 
@@ -623,6 +624,7 @@
     $(id).addEventListener('input', ()=>{
       const n = parseNum($(id).value);
       $('h-'+id).textContent = n ? arWords(n) : '';
+      $('h-'+id).classList.toggle('has', !!arWords(n));
       if(shown) calc(false);
     });
   });
@@ -1151,7 +1153,7 @@
   $('resetBtn').addEventListener('click', ()=>{
     ['name','followers','tweets','views'].forEach(id=>$(id).value='');
     $('name').dispatchEvent(new Event('input'));
-    ['followers','tweets','views'].forEach(id=>$('h-'+id).textContent='');
+    ['followers','tweets','views'].forEach(id=>{ $('h-'+id).textContent=''; $('h-'+id).classList.remove('has'); });
     $('avatarLetter').textContent='?';
     clearPhoto();
     $('results').classList.remove('show'); shown=false;
