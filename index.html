@@ -384,6 +384,53 @@
   @keyframes saveSlide{to{background-position:100% 0}}
 
 
+
+  /* ===== payout calendar (glass calendar with a living scene) ===== */
+  .pcal-box{margin-top:14px}
+  .pcal{position:relative;border-radius:20px;overflow:hidden;background:#07080a;padding:34px 18px 30px;perspective:1400px;isolation:isolate}
+  .pcal-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .pcal-card{position:relative;z-index:1;max-width:520px;margin:0 auto;border-radius:34px;overflow:hidden;background:rgba(20,22,28,.74);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:24px 26px 22px;transform-style:preserve-3d;will-change:transform;
+    box-shadow:0 0 0 1px rgba(255,255,255,.09) inset,0 1px 0 rgba(255,255,255,.16) inset,0 50px 100px -40px rgba(0,0,0,.85),0 20px 40px -20px rgba(0,0,0,.6)}
+  .pcal-scene{position:absolute;left:0;top:0;width:100%;height:230px;z-index:0;pointer-events:none;
+    -webkit-mask-image:linear-gradient(180deg,#000 0,#000 30%,rgba(0,0,0,.78) 42%,rgba(0,0,0,.5) 54%,rgba(0,0,0,.26) 66%,rgba(0,0,0,.1) 78%,rgba(0,0,0,.03) 90%,transparent);
+            mask-image:linear-gradient(180deg,#000 0,#000 30%,rgba(0,0,0,.78) 42%,rgba(0,0,0,.5) 54%,rgba(0,0,0,.26) 66%,rgba(0,0,0,.1) 78%,rgba(0,0,0,.03) 90%,transparent)}
+  .pcal-over{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+  .pcal-edge{position:absolute;inset:0;border-radius:inherit;z-index:5;pointer-events:none}
+  .pcal-nav{position:absolute;top:20px;width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;z-index:6;display:grid;place-items:center;
+    background:rgba(255,255,255,.08);box-shadow:0 0 0 1px rgba(255,255,255,.1) inset;transition:transform .15s,background .25s}
+  .pcal-nav:hover{background:rgba(255,255,255,.16)}
+  .pcal-nav:active{transform:scale(.9)}
+  .pcal-nav svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .pcal-nav.prev{right:66px}.pcal-nav.next{right:20px}
+  .pcal-lab{position:relative;z-index:3;margin-top:84px;min-height:92px}
+  .pcal-lab small{display:block;font-family:"Space Mono",ui-monospace,monospace;font-size:12px;letter-spacing:1px;color:rgba(242,243,245,.6)}
+  .pcal-lab b{display:block;margin-top:5px;font-size:34px;line-height:1.15;font-weight:700;letter-spacing:-1px;color:#f2f3f5}
+  .pcal-lab span{display:block;margin-top:4px;font-size:13.5px;color:rgba(242,243,245,.62)}
+  .pcal-wd{position:relative;z-index:3;display:grid;grid-template-columns:repeat(7,1fr);margin-top:14px}
+  .pcal-wd span{text-align:center;font-family:"Space Mono",ui-monospace,monospace;font-size:11px;letter-spacing:1px;line-height:36px;color:rgba(242,243,245,.38)}
+  .pcal-gw{position:relative;z-index:3}
+  .pcal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+  .pcal-grid button{position:relative;height:54px;border:none;background:none;color:#f2f3f5;font:inherit;font-size:18px;font-variant-numeric:tabular-nums;cursor:pointer;border-radius:50%;z-index:2}
+  .pcal-grid button.out{color:rgba(242,243,245,.22)}
+  .pcal-grid button.today::before{content:"";position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.28) inset}
+  .pcal-grid button i{position:absolute;left:50%;bottom:6px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;transition:opacity .3s}
+  .pcal-grid button.sel i{opacity:0}
+  .pcal-pill{position:absolute;left:0;top:0;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;z-index:1;opacity:0;
+    transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .3s,background .5s,box-shadow .5s}
+  .pcal-legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:12px;font-size:12px;color:var(--muted)}
+  .pcal-legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  @media (max-width:640px){
+    .pcal{padding:22px 10px 20px}
+    .pcal-card{border-radius:28px;padding:18px 14px 16px}
+    .pcal-scene{height:200px}
+    .pcal-lab{margin-top:70px;min-height:84px}
+    .pcal-lab b{font-size:27px}
+    .pcal-grid button{height:46px;font-size:16px}
+    .pcal-pill{width:38px;height:38px;margin:-19px 0 0 -19px}
+    .pcal-grid button.today::before{width:34px;height:34px;margin:-17px 0 0 -17px}
+    .pcal-nav{top:16px;width:34px;height:34px}.pcal-nav.prev{right:58px}.pcal-nav.next{right:16px}
+  }
 </style>
 </head>
 <body>
@@ -493,6 +540,24 @@
           <div class="stat"><div class="k">Verified views (period)</div><div class="v sm" id="sVerified">0</div></div>
         </div>
       </div>
+    </div>
+
+    <div class="box pcal-box r-anim" style="animation-delay:.28s">
+      <h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Payout calendar</h3>
+      <div class="pcal" id="pcal">
+        <canvas class="pcal-bg" id="pcalBg"></canvas>
+        <div class="pcal-card" id="pcalCard">
+          <canvas class="pcal-scene" id="pcalScene"></canvas>
+          <button class="pcal-nav prev" id="pcalPrev" type="button" aria-label="Previous month"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button>
+          <button class="pcal-nav next" id="pcalNext" type="button" aria-label="Next month"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button>
+          <div class="pcal-lab" id="pcalLab"><small id="pcalSmall"></small><b id="pcalTitle"></b><span id="pcalSub"></span></div>
+          <div class="pcal-wd"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span></div>
+          <div class="pcal-gw" id="pcalGw"><div class="pcal-pill" id="pcalPill"></div><div class="pcal-grid" id="pcalGrid"></div></div>
+          <canvas class="pcal-over" id="pcalOver"></canvas>
+          <div class="pcal-edge" id="pcalEdge"></div>
+        </div>
+      </div>
+      <div class="pcal-legend"><span><i style="background:#ffc060"></i>Next payout</span><span><i style="background:#4fdcff"></i>Upcoming payouts</span><span><i style="background:#6b6b78"></i>Past payouts</span><span>Tap any day</span></div>
     </div>
 
     <div class="box rates r-anim" style="animation-delay:.3s">
@@ -817,6 +882,7 @@
     }
 
     renderRates(views, rate);
+    setTimeout(()=>{ if(window.__pcalUpdate) window.__pcalUpdate(fromButton); },0);
     window.__last = {nm, periodEarn, cycleEarn, month, next:p.next, views, followers, tweets, vp, rate, period:$('rPeriod').textContent};
 
     if(fromButton && !shown){
@@ -1217,6 +1283,299 @@
 
 
 
+
+// ===== payout calendar: glass calendar with a living scene =====
+(function(){
+  const $=id=>document.getElementById(id);
+  const box=$('pcal'), card=$('pcalCard'), gridEl=$('pcalGrid'), gw=$('pcalGw'), pill=$('pcalPill'), edge=$('pcalEdge');
+  const cvBg=$('pcalBg'), cvSc=$('pcalScene'), cvOv=$('pcalOver');
+  const bg=cvBg.getContext('2d'), sc=cvSc.getContext('2d'), ov=cvOv.getContext('2d');
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ANCHOR=new Date(2026,8,25), CYCLE=14, USD_SAR=3.75, MIN=30;
+  const TAU=Math.PI*2;
+  const cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), lerp=(a,b,t)=>a+(b-a)*t;
+  const oq=t=>{t=cl(t);return 1-Math.pow(1-t,5)};
+  const ss=(a,b,x)=>{const t=cl((x-a)/(b-a));return t*t*(3-2*t)};
+  const rnd=n=>{const x=Math.sin(n*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+  const mixc=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+  const rgb=(c,a=1)=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`;
+  function glow(g,x,y,r,c,a){ if(a<=0.002) return; const k=g.createRadialGradient(x,y,0,x,y,r); k.addColorStop(0,rgb(c,a)); k.addColorStop(1,rgb(c,0)); g.fillStyle=k; g.beginPath(); g.arc(x,y,r,0,TAU); g.fill(); }
+  const fmt=n=> n>=100 ? Math.round(n).toLocaleString('en-US') : n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const day0=d=>{const x=new Date(d); x.setHours(0,0,0,0); return x;};
+  const sameDay=(a,b)=>a&&b&&a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();
+  const isPayout=d=>{ const diff=Math.round((day0(d)-ANCHOR)/864e5); return diff>=0 && diff%CYCLE===0; };
+  function nextPayout(){ const t=day0(new Date()); const diff=Math.round((t-ANCHOR)/864e5); if(diff<=0) return new Date(ANCHOR); const k=Math.ceil(diff/CYCLE); const n=new Date(ANCHOR); n.setDate(ANCHOR.getDate()+k*CYCLE); return n; }
+  const WD=['SUN','MON','TUE','WED','THU','FRI','SAT'], MO=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const MONTH_NAME=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  // tints: ambient (aurora violet), next payout (gold), upcoming (cyan), past (grey)
+  const C_AMB=[106,60,255], C_NEXT=[255,176,72], C_FUT=[31,210,255], C_PAST=[120,128,150], C_DAY=[180,190,255];
+  let view=null, sel=null, selKind='none', selT=0, tint=[...C_AMB];
+  let aCoins=0, aFw=0, aAmb=1, started=false, visible=false, raf=0, t0=performance.now();
+  let pillXY=null, tilt=[0,0], tiltT=[0,0];
+
+  // ----- canvas sizing -----
+  let W=0,H=0,SH=230,DPR=1, BW=0, BH=0;
+  function fit(){
+    DPR=Math.min(2,window.devicePixelRatio||1);
+    const r=card.getBoundingClientRect(); W=r.width; H=r.height;
+    SH=cvSc.getBoundingClientRect().height||230;
+    cvSc.width=Math.round(W*DPR); cvSc.height=Math.round(SH*DPR);
+    cvOv.width=Math.round(W*DPR); cvOv.height=Math.round(H*DPR);
+    const b=box.getBoundingClientRect(); BW=b.width; BH=b.height;
+    cvBg.width=Math.round(BW/2); cvBg.height=Math.round(BH/2);
+    placePill(false);
+  }
+
+  // ----- the month grid -----
+  function cellsFor(y,m){
+    const first=(new Date(y,m,1).getDay()+6)%7, days=new Date(y,m+1,0).getDate(), prevDays=new Date(y,m,0).getDate();
+    const rows=Math.ceil((first+days)/7), out=[];
+    for(let i=0;i<rows*7;i++){
+      const d=i-first+1; let date, isOut=false;
+      if(d<1){ date=new Date(y,m-1,prevDays+d); isOut=true; }
+      else if(d>days){ date=new Date(y,m+1,d-days); isOut=true; }
+      else date=new Date(y,m,d);
+      out.push({date,out:isOut});
+    }
+    return out;
+  }
+  function kindOf(d){
+    if(!isPayout(d)) return 'day';
+    const np=nextPayout();
+    if(sameDay(d,np)) return 'next';
+    return day0(d)<np ? 'past' : 'future';
+  }
+  const DOT={next:'#ffc060',future:'#4fdcff',past:'#6b6b78'};
+  function buildGrid(dir){
+    const cells=cellsFor(view.getFullYear(),view.getMonth()), today=day0(new Date());
+    const make=()=>{
+      gridEl.innerHTML='';
+      cells.forEach((c,i)=>{
+        const b=document.createElement('button'); b.type='button'; b.textContent=c.date.getDate();
+        if(c.out) b.classList.add('out');
+        if(sameDay(c.date,today)) b.classList.add('today');
+        const k=kindOf(c.date);
+        if(k!=='day' && !c.out){ const dot=document.createElement('i'); dot.style.background=DOT[k]; b.appendChild(dot); }
+        if(sel && sameDay(c.date,sel)) b.classList.add('sel');
+        b.addEventListener('click',()=>select(c.date,true));
+        gridEl.appendChild(b);
+        if(dir && !reduce){
+          const col=i%7;
+          b.animate([{opacity:0,transform:`translateX(${28*dir}px)`},{opacity:1,transform:'none'}],{duration:550,delay:260+col*30,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+        }
+      });
+      if(started) fit(); else placePill(false);
+    };
+    if(dir && !reduce && gridEl.children.length){
+      const olds=[...gridEl.children]; let n=0;
+      olds.forEach((b,i)=>{ const a=b.animate([{opacity:1,transform:'none'},{opacity:0,transform:`translateX(${-28*dir}px)`}],{duration:300,delay:(i%7)*25,easing:'cubic-bezier(.65,0,.35,1)',fill:'forwards'}); a.onfinish=()=>{ if(++n===olds.length) make(); }; });
+      pill.style.opacity=0;
+    } else make();
+  }
+
+  function placePill(animate){
+    if(!sel){ pill.style.opacity=0; pillXY=null; return; }
+    const cells=cellsFor(view.getFullYear(),view.getMonth());
+    const idx=cells.findIndex(c=>!c.out && sameDay(c.date,sel));
+    if(idx<0){ pill.style.opacity=0; pillXY=null; return; }
+    const b=gridEl.children[idx];
+    const x=b.offsetLeft+b.offsetWidth/2, y=b.offsetTop+b.offsetHeight/2;
+    if(!animate){ pill.style.transition='none'; requestAnimationFrame(()=>pill.style.transition=''); }
+    pill.style.transform=`translate(${x}px,${y}px)`;
+    pill.style.opacity=1;
+    const pc = selKind==='next'?C_NEXT: selKind==='future'?C_FUT: selKind==='past'?C_PAST: C_DAY;
+    const dk=mixc(pc,[20,20,40],.35);
+    pill.style.background=`linear-gradient(160deg,${rgb(mixc(pc,[255,255,255],.25))},${rgb(dk)})`;
+    pill.style.boxShadow=`0 0 0 1px rgba(255,255,255,.35) inset,0 0 32px ${rgb(pc,.6)},0 8px 20px -6px ${rgb(pc,.7)}`;
+    // the pill's centre in card px (for the coin stack)
+    const cr=card.getBoundingClientRect(), gr=gw.getBoundingClientRect();
+    pillXY=[gr.left-cr.left+x, gr.top-cr.top+y];
+  }
+
+  // ----- label -----
+  function setLabel(small,title,sub){
+    const lab=$('pcalLab');
+    $('pcalSmall').textContent=small; $('pcalTitle').textContent=title; $('pcalSub').textContent=sub;
+    if(!reduce) lab.animate([{opacity:0,filter:'blur(6px)',transform:'translateY(10px)'},{opacity:1,filter:'blur(0)',transform:'none'}],{duration:600,easing:'cubic-bezier(.22,1,.36,1)'});
+  }
+  function cycleAmt(){ const r=window.__last; return r ? r.cycleEarn : 0; }
+  function monthLabel(){
+    const y=view.getFullYear(), m=view.getMonth();
+    const n=cellsFor(y,m).filter(c=>!c.out && isPayout(c.date)).length;
+    setLabel(String(y), MONTH_NAME[m], n ? `${n} payout day${n>1?'s':''} this month` : 'No payout days this month');
+  }
+  function select(d,user){
+    sel=day0(d); selKind=kindOf(sel); selT=performance.now();
+    if(sel.getMonth()!==view.getMonth()||sel.getFullYear()!==view.getFullYear()){
+      const dir = sel>view ? 1 : -1; view=new Date(sel.getFullYear(),sel.getMonth(),1); buildGrid(dir);
+    } else { [...gridEl.children].forEach(b=>b.classList.remove('sel')); buildGridSelOnly(); placePill(true); }
+    const small=`${WD[sel.getDay()]} · ${sel.getDate()} ${MO[sel.getMonth()]}`;
+    const amt=cycleAmt(), np=nextPayout(), days=Math.round((np-day0(new Date()))/864e5);
+    if(selKind==='next'){
+      setLabel(small, '$'+fmt(amt), `Next payout · ≈ ${fmt(amt*USD_SAR)} SAR · ${days===0?'today':days===1?'tomorrow':'in '+days+' days'}${amt<MIN?' · rolls over (< $30)':''}`);
+    } else if(selKind==='future'){
+      setLabel(small, '$'+fmt(amt), `Upcoming payout · estimated at your current pace`);
+    } else if(selKind==='past'){
+      setLabel(small, 'Paid out', 'Past payout cycle');
+    } else {
+      const dd=Math.round((np-sel)/864e5);
+      setLabel(small, 'No payout', dd>0 ? `Next payout in ${dd} day${dd>1?'s':''} · ${WD[np.getDay()]} ${np.getDate()} ${MO[np.getMonth()]}` : `Payouts arrive every 2 weeks`);
+    }
+  }
+  function buildGridSelOnly(){
+    const cells=cellsFor(view.getFullYear(),view.getMonth());
+    [...gridEl.children].forEach((b,i)=>b.classList.toggle('sel', !cells[i].out && sameDay(cells[i].date,sel)));
+  }
+  function shiftMonth(dir){
+    view=new Date(view.getFullYear(),view.getMonth()+dir,1);
+    buildGrid(dir);
+    if(!(sel && sel.getMonth()===view.getMonth() && sel.getFullYear()===view.getFullYear())){ monthLabel(); }
+    else setTimeout(()=>placePill(false),900);
+  }
+  $('pcalPrev').addEventListener('click',()=>shiftMonth(-1));
+  $('pcalNext').addEventListener('click',()=>shiftMonth(1));
+
+  // ----- scenes (card px) -----
+  function ambient(g,t,a){
+    if(a<0.01) return;
+    g.save(); g.globalCompositeOperation='lighter';
+    glow(g,W*0.5,30,W*0.48,[255,43,179],0.16*a);
+    glow(g,W*0.82,80,W*0.36,[31,210,255],0.15*a);
+    glow(g,W*0.18,90,W*0.34,[106,60,255],0.18*a);
+    for(let k=0;k<40;k++){
+      const u=k/39;
+      const c = u<0.5 ? mixc([255,60,190],[120,90,255],u*2) : mixc([120,90,255],[40,215,255],(u-0.5)*2);
+      g.strokeStyle=rgb(c,(0.05+0.1*Math.sin(Math.PI*u))*a); g.lineWidth=1.5; g.beginPath();
+      for(let x=-20;x<=W+20;x+=12){
+        const y=90+u*42*Math.sin(x*0.006+t*0.5+1)+30*Math.sin(x*0.009-t*0.7+u*2.2)+16*Math.sin(x*0.021+t*1.1+u*4);
+        x===-20?g.moveTo(x,y):g.lineTo(x,y);
+      }
+      g.stroke();
+    }
+    g.restore();
+  }
+  const COINS=[...Array(70)].map((_,i)=>({x:rnd(i),ph:rnd(i+50),sp:0.35+rnd(i+90)*0.75,r:rnd(i+130),sw:rnd(i+170),spin:rnd(i+210)*6}));
+  function coin(g,x,y,r,spin,a){
+    const sx=Math.max(0.12,Math.abs(Math.cos(spin)));
+    g.save(); g.translate(x,y); g.scale(sx,1);
+    const gr=g.createLinearGradient(-r,-r,r,r); gr.addColorStop(0,rgb([255,236,160],a)); gr.addColorStop(.5,rgb([255,196,70],a)); gr.addColorStop(1,rgb([214,140,30],a));
+    g.fillStyle=gr; g.beginPath(); g.arc(0,0,r,0,TAU); g.fill();
+    g.strokeStyle=rgb([170,105,20],a*0.9); g.lineWidth=Math.max(1,r*0.14); g.beginPath(); g.arc(0,0,r*0.78,0,TAU); g.stroke();
+    if(sx>0.55 && r>4){ g.fillStyle=rgb([150,92,15],a*0.9); g.font=`800 ${Math.round(r*1.15)}px "Plus Jakarta Sans",sans-serif`; g.textAlign='center'; g.textBaseline='middle'; g.fillText('$',0,r*0.06); }
+    g.restore();
+  }
+  function coins(g,tt,a,HH,WW,dens){
+    if(a<0.01) return;
+    COINS.forEach((f,i)=>{
+      if(i/COINS.length>dens) return;
+      const depth=f.r, rad=3+depth*6, fall=tt*(50+f.sp*70)*(0.6+depth*0.8);
+      const y=((f.ph*HH+fall)%(HH+30))-15;
+      if(!(fall>y+15 || tt>3.2)) return;
+      const x=((f.x*WW+Math.sin(tt*(0.6+f.sw)+i)*(8+depth*12))%(WW+30))-15;
+      coin(g,x,y,rad,f.spin+tt*(2+f.sw*4),(0.55+depth*0.45)*a);
+    });
+  }
+  const PAL=[[255,43,179],[106,60,255],[31,210,255],[255,233,74],[255,255,255],[150,120,255]];
+  function fireworks(g,t,a){
+    if(a<0.01) return 0;
+    let flash=0; g.save(); g.globalCompositeOperation='lighter';
+    glow(g,W/2,SH,W*0.5,[60,40,120],0.25*a);
+    const P=3.4;
+    for(let k=0;k<7;k++){
+      const d=((t - k*0.48)%P+P)%P;
+      const bx=[0.72,0.3,0.52,0.14,0.86,0.42,0.64][k]*W, by=56+rnd(k+17)*56, c=PAL[k%PAL.length], n=34+(k*7)%12, pw=(0.7+rnd(k+71)*0.4)*Math.min(1,W/520);
+      if(d<1.7){
+        const life=d/1.7; flash+=Math.exp(-d/0.22);
+        glow(g,bx,by,150*oq(d/0.3)*Math.min(1,W/520),c,0.35*(1-life)*a*Math.exp(-d*2));
+        for(let i=0;i<n;i++){
+          const an=(i/n)*TAU+rnd(k*31+i)*0.25, sp=(160+rnd(k*53+i)*140)*pw*(i%3?1:0.55), kk=2.6;
+          const s=(1-Math.exp(-kk*d))/kk, x=bx+Math.cos(an)*sp*s, y=by+Math.sin(an)*sp*s+26*d*d;
+          const dm=Math.max(0,d-0.15), s0=(1-Math.exp(-kk*dm))/kk, x0=bx+Math.cos(an)*sp*s0, y0=by+Math.sin(an)*sp*s0+26*dm*dm;
+          const al=Math.pow(1-life,1.4)*(0.6+0.4*Math.sin(d*38+i*2.3))*a;
+          g.strokeStyle=rgb(mixc([255,255,255],c,cl(d*2.2)),al); g.lineWidth=2.2; g.lineCap='round';
+          g.beginPath(); g.moveTo(x0,y0); g.lineTo(x,y); g.stroke();
+        }
+      } else if(d>P-0.42){
+        const u=(d-(P-0.42))/0.42, y=lerp(SH+10,by,oq(u)), x=bx+Math.sin(u*9+k)*3;
+        g.strokeStyle=rgb([255,236,200],0.8*a); g.lineWidth=2; g.lineCap='round'; g.beginPath(); g.moveTo(x,y); g.lineTo(x,y+26*(1-u)+6); g.stroke();
+        glow(g,x,y,9,[255,236,200],0.7*a);
+      }
+    }
+    g.restore(); return flash;
+  }
+  // a little pile of coins building up on top of the selected next-payout day
+  function coinPile(g,cx,cy,cap,a){
+    const R=pill.offsetWidth/2||22, n=Math.round(cap*9);
+    for(let i=0;i<n;i++){
+      const row=i<5?0:(i<8?1:2), idxs=[[0,1,2,3,4],[0,1,2],[0]][row], j=i-(row===0?0:row===1?5:8);
+      const cols=idxs.length, off=(j-(cols-1)/2)*R*0.42;
+      const x=cx+off, y=cy-R-2-row*R*0.24 - (row===0?Math.cos(off/R*1.4)*R*0.18:0);
+      g.save(); g.translate(x,y); g.scale(1,0.42);
+      const gr=g.createLinearGradient(0,-R*0.3,0,R*0.3); gr.addColorStop(0,rgb([255,236,160],a)); gr.addColorStop(1,rgb([214,140,30],a));
+      g.shadowColor='rgba(80,40,0,.45)'; g.shadowBlur=4; g.shadowOffsetY=2;
+      g.fillStyle=gr; g.beginPath(); g.arc(0,0,R*0.3,0,TAU); g.fill();
+      g.restore();
+    }
+  }
+
+  // ----- frame -----
+  function frame(now){
+    const t=(now-t0)/1000, tt=(now-selT)/1000;
+    const want={coins: selKind==='next'?1:0, fw: selKind==='future'?1:0};
+    const k=reduce?1:0.06;
+    aCoins+= (want.coins-aCoins)*k; aFw+=(want.fw-aFw)*k; aAmb=1-Math.max(aCoins,aFw)*0.85;
+    const target = selKind==='next'?C_NEXT: selKind==='future'?C_FUT: selKind==='past'?C_PAST: C_AMB;
+    tint=mixc(tint,target,k);
+
+    // scene
+    sc.setTransform(DPR,0,0,DPR,0,0); sc.clearRect(0,0,W,SH);
+    ambient(sc,t,aAmb);
+    if(aCoins>0.01){ sc.save(); sc.globalCompositeOperation='lighter'; glow(sc,W*0.7,30,W*0.42,[255,170,60],0.3*aCoins); glow(sc,W*0.25,10,W*0.35,[255,220,140],0.18*aCoins); sc.restore(); coins(sc,tt,aCoins,SH*0.62,W,1); }
+    const flash=fireworks(sc,t,aFw);
+
+    // overlay: coins over the whole card + the pile on the day
+    ov.setTransform(DPR,0,0,DPR,0,0); ov.clearRect(0,0,W,H);
+    if(aCoins>0.01){
+      ov.save(); ov.globalAlpha=0.38; coins(ov,tt,aCoins,H,W,W<480?0.14:0.22); ov.restore();
+      if(pillXY && sel && selKind==='next'){ const cap=ss(0.7,2.9,tt); if(cap>0.01) coinPile(ov,pillXY[0],pillXY[1],cap,aCoins); }
+    }
+
+    // light behind the glass
+    bg.setTransform(0.5,0,0,0.5,0,0); bg.fillStyle='#07080A'; bg.fillRect(0,0,BW,BH);
+    const p=(t/13)*TAU, f=Math.min(1,flash);
+    glow(bg,BW*0.35+BW*0.06*Math.sin(p),BH*0.3+BH*0.04*Math.cos(p),Math.max(BW,BH)*0.55,tint,0.34+0.1*f);
+    glow(bg,BW*0.7-BW*0.05*Math.sin(p),BH*0.8+BH*0.03*Math.cos(p*2),Math.max(BW,BH)*0.5,mixc(tint,[60,70,160],0.6),0.26);
+    glow(bg,BW*0.5,BH*0.2,Math.max(BW,BH)*0.3,tint,0.2+0.14*f);
+
+    edge.style.boxShadow=`0 0 0 1px ${rgb(tint,0.2+0.25*f)} inset, 0 2px 0 ${rgb(mixc(tint,[255,255,255],0.6),0.18+0.3*f)} inset`;
+
+    // gentle tilt toward the pointer
+    tilt[0]+= (tiltT[0]-tilt[0])*0.08; tilt[1]+= (tiltT[1]-tilt[1])*0.08;
+    card.style.transform=`rotateX(${(-tilt[1]*2.4).toFixed(3)}deg) rotateY(${(tilt[0]*2.4).toFixed(3)}deg)`;
+
+    if(!reduce && visible) raf=requestAnimationFrame(frame);
+  }
+  box.addEventListener('pointermove',e=>{ const r=box.getBoundingClientRect(); tiltT=[((e.clientX-r.left)/r.width-0.5)*2,((e.clientY-r.top)/r.height-0.5)*2]; });
+  box.addEventListener('pointerleave',()=>{ tiltT=[0,0]; });
+
+  function run(){ cancelAnimationFrame(raf); if(reduce){ frame(performance.now()); } else if(visible) raf=requestAnimationFrame(frame); }
+  const io=new IntersectionObserver(es=>{ visible=es[0].isIntersecting; if(visible && started) run(); else cancelAnimationFrame(raf); },{threshold:0.05});
+  io.observe(box);
+  let rt; addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(()=>{ if(started){ fit(); } },120); });
+  document.addEventListener('visibilitychange',()=>{ if(document.hidden) cancelAnimationFrame(raf); else if(started) run(); });
+
+  window.__pcalUpdate=function(fromButton){
+    if(!started){
+      started=true; const np=nextPayout(); view=new Date(np.getFullYear(),np.getMonth(),1);
+      buildGrid(0); monthLabel();
+      requestAnimationFrame(()=>{ fit(); run(); });
+      setTimeout(()=>select(np,false), reduce?0:1100);
+      return;
+    }
+    if(sel) select(sel,false);   // refresh the amount in the label
+  };
+})();
 </script>
 </body>
 </html>
