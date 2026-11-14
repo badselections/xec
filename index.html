@@ -1097,6 +1097,19 @@
         ctx.fillText('* ESTIMATE ONLY · NOT AFFILIATED WITH X', X(px+pw/2), Y(py+ph-22));
       ctx.globalAlpha=1;
     }
+    // QR code → xec.life, bottom-right corner beside the barcode
+    {
+      const QR='1111111010010010001111111|1000001010111110001000001|1011101011010111001011101|1011101000100101101011101|1011101011011010101011101|1000001001110110101000001|1111111010101010101111111|0000000000011111100000000|1001111110101010110010111|0111000011101011110111110|0110001101000001101101001|0110100110000011100101111|1101011001010111101000001|1100100001001011110010010|1110001101000011011011111|1010100010001110010101101|1011101100111001111110110|0000000010010000100010110|1111111010001110101010001|1000001011010101100010001|1011101011110101111110011|1011101011001100101000011|1011101000010101110011111|1000001001011101000110111|1111111011111100110001001'.split('|'), n=QR.length;
+      const box=96, pad=7, qx=X(510), qy=Y(1052), bw=box*K, cell=(box-pad*2)*K/n;
+      ctx.save();
+      ctx.fillStyle='#ffffff'; ctx.shadowColor='rgba(0,0,0,.18)'; ctx.shadowBlur=10*K;
+      ctx.beginPath(); ctx.roundRect ? ctx.roundRect(qx,qy,bw,bw,10*K) : rr(ctx,qx,qy,bw,bw,10*K); ctx.fill();
+      ctx.shadowBlur=0; ctx.fillStyle='#0a0a0a';
+      for(let r=0;r<n;r++) for(let c=0;c<n;c++) if(QR[r][c]==='1') ctx.fillRect(qx+pad*K+c*cell, qy+pad*K+r*cell, Math.ceil(cell), Math.ceil(cell));
+      ctx.textAlign='center'; ctx.font=M(700,10.5);
+      ctx.fillText('SCAN · XEC.LIFE', qx+bw/2, qy+bw+15*K);
+      ctx.restore();
+    }
     ctx.textAlign='left';
     drawWM(ctx);
     return steps;
