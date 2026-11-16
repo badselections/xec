@@ -299,6 +299,18 @@
   .x-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line-2);background:#000;color:#fff;font-size:20px;cursor:pointer;display:grid;place-items:center}
   .x-close:hover{border-color:var(--blue)}
 
+  .guides{margin-top:34px}
+  .guides-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .guides-h h2{font-size:20px;font-weight:800;letter-spacing:-.2px}
+  .guides-h a{font-size:13px;font-weight:700;color:var(--blue);text-decoration:none}
+  .g-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+  .g-card{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;
+    background:linear-gradient(160deg,rgba(29,155,240,.12),rgba(122,92,255,.07) 60%,rgba(255,255,255,0)),#0b0b0dee;backdrop-filter:blur(6px);transition:border-color .2s,transform .2s}
+  .g-card:hover{border-color:var(--blue);transform:translateY(-2px)}
+  .g-tag{font-style:normal;align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--blue);background:rgba(29,155,240,.12);padding:4px 9px;border-radius:20px}
+  .g-card b{font-size:15.5px;line-height:1.35}
+  .g-card span{font-size:13px;color:#a3a3ad;line-height:1.5}
+  .g-card em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--blue);margin-top:auto}
   footer{margin-top:28px;text-align:center;font-size:12px;color:var(--dim);line-height:1.9}
   footer a{color:var(--blue);text-decoration:none}
 
@@ -614,6 +626,16 @@
     <div class="actions r-anim" style="animation-delay:.5s">
       <button class="ghost" id="copyBtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy result</button>
       <button class="ghost" id="resetBtn"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>New calculation</button>
+    </div>
+  </section>
+
+  <section class="guides" aria-label="Creator guides">
+    <div class="guides-h"><h2>Creator guides</h2><a href="https://www.xec.life/blog">All articles &rarr;</a></div>
+    <div class="g-list">
+      <a class="g-card" href="https://www.xec.life/blog/x-original-content-rewards"><i class="g-tag">Program guide</i><b>X Original Content Rewards explained</b><span>Eligibility, qualified impressions, the $30 minimum and what gets you excluded.</span><em>7 min read &rarr;</em></a>
+      <a class="g-card" href="https://www.xec.life/blog/how-much-does-x-pay-per-1000-impressions"><i class="g-tag">Earnings</i><b>How much does X pay per 1,000 impressions?</b><span>Realistic ranges and worked examples by account size.</span><em>6 min read &rarr;</em></a>
+      <a class="g-card" href="https://www.xec.life/blog/reach-500k-verified-impressions"><i class="g-tag">Growth</i><b>Reach 500K verified impressions in 90 days</b><span>A daily plan that fits the new program rules.</span><em>8 min read &rarr;</em></a>
+      <a class="g-card" href="https://www.xec.life/blog/best-x-scheduling-tools"><i class="g-tag">Tools</i><b>Best X tools for creators in 2026</b><span>Typefully vs Hypefury vs Tweet Hunter vs Buffer.</span><em>7 min read &rarr;</em></a>
     </div>
   </section>
 
