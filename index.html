@@ -431,7 +431,17 @@
     .pcal-grid button.today::before{width:34px;height:34px;margin:-17px 0 0 -17px}
     .pcal-nav{top:16px;width:34px;height:34px}.pcal-nav.prev{right:58px}.pcal-nav.next{right:16px}
   }
+
+  .foot-nav{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .foot-nav a{color:#c9c9d3;text-decoration:none}.foot-nav a:hover{color:#fff}
 </style>
+<script>
+  // Vercel Web Analytics: only on the live domain
+  if (/(^|\.)xec\.life$/.test(location.hostname)) {
+    window.va = window.va || function(){ (window.vaq = window.vaq || []).push(arguments); };
+    var s = document.createElement('script'); s.defer = true; s.src = '/_vercel/insights/script.js'; document.head.appendChild(s);
+  }
+</script>
 </head>
 <body>
 <div class="bgx" id="bg4"><canvas id="cv4"></canvas></div>
@@ -611,6 +621,7 @@
     Estimates based on X's Original Content Rewards program: payouts every two weeks, $30 minimum.<br>
     Not affiliated with X. Your actual earnings appear in Creator Studio on your account.<br>
     <a href="https://help.x.com/using-x/original-content-rewards" target="_blank" rel="noopener">Official program terms</a>
+    <nav class="foot-nav"><a href="https://www.xec.life/about">About</a><a href="https://www.xec.life/faq">FAQ</a><a href="https://www.xec.life/privacy">Privacy</a><a href="https://www.xec.life/contact">Contact</a></nav>
   </footer>
 </div>
 
